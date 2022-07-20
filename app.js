@@ -6,13 +6,12 @@
 
 
 const formElement = document.querySelector("form");
-const taskList = document.querySelector("ul")
+const ulElement = document.querySelector("ul")
 
 
 formElement.addEventListener("submit", function (e) {
     //preventing the default bahaviour of forms
     e.preventDefault();
-
 
     const inputElement = document.querySelector("input")
 
@@ -23,16 +22,15 @@ formElement.addEventListener("submit", function (e) {
     if (task === "") {
         alert("Please insert a task")
     } else {
-        const listTaskElmt = document.createElement("li");
-        listTaskElmt.innerHTML = `<i class="far fa-square"></i>`;
-
+        const listItemElmt = document.createElement("li");
+        listItemElmt.innerHTML = `<i class="far fa-square"></i>`;
 
         const paragphElemt = document.createElement("p");
         paragphElemt.textContent = task;
+        listItemElmt.appendChild(paragphElemt);
 
-        listTaskElmt.appendChild(paragphElemt);
-        taskList.appendChild(listTaskElmt);
-
+        // const ulElement = document.querySelector("ul")
+        ulElement.appendChild(listItemElmt);
 
 
         //Cleaning the input field
@@ -41,8 +39,16 @@ formElement.addEventListener("submit", function (e) {
 
 });
 
-document.querySelector("li").addEventListener("click", function () {
-    console.log("item clicked");
+ulElement.addEventListener("click", function (e) {
+    if (e.target.tagName === "I") {
+        updateToDo(e.target)
+    };
 })
+
+function updateToDo(iElement) {
+    iElement.classList.toggle("fa-square");
+    iElement.classList.toggle("fa-check-square")
+    iElement.parentElement.classList.toggle("text-muted")
+}
 
 
