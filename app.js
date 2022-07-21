@@ -6,49 +6,45 @@
 
 
 const formElement = document.querySelector("form");
-const ulElement = document.querySelector("ul")
-
+const ulElement = document.querySelector("ul");
 
 formElement.addEventListener("submit", function (e) {
-    //preventing the default bahaviour of forms
     e.preventDefault();
 
-    const inputElement = document.querySelector("input")
-
-    //selecting the input value
+    const inputElement = document.querySelector("input");
     const task = inputElement.value;
 
-
-    if (task === "") {
-        alert("Please insert a task")
+    if (!task) {
+        alert("please fill a task")
     } else {
-        const listItemElmt = document.createElement("li");
-        listItemElmt.innerHTML = `<i class="far fa-square"></i>`;
 
-        const paragphElemt = document.createElement("p");
-        paragphElemt.textContent = task;
-        listItemElmt.appendChild(paragphElemt);
+        const newLiElement = document.createElement("li");
+        const newParagElement = document.createElement("p");
 
-        // const ulElement = document.querySelector("ul")
-        ulElement.appendChild(listItemElmt);
+        newLiElement.innerHTML = `<i class="far fa-square"></i>`;
+        newParagElement.textContent = task;
 
+        newLiElement.appendChild(newParagElement);
 
-        //Cleaning the input field
-        inputElement.value = ""
+        ulElement.appendChild(newLiElement)
+
+        inputElement.value = "";
     }
-
 });
+
+const iconElement = document.querySelector("i")
 
 ulElement.addEventListener("click", function (e) {
     if (e.target.tagName === "I") {
-        updateToDo(e.target)
-    };
+        doThis(e.target)
+    }
 })
 
-function updateToDo(iElement) {
+function doThis(iElement) {
     iElement.classList.toggle("fa-square");
-    iElement.classList.toggle("fa-check-square")
+    iElement.classList.toggle("fa-check-square");
     iElement.parentElement.classList.toggle("text-muted")
+
 }
 
 
